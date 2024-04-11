@@ -40,7 +40,7 @@ int main () {
 
         float x = circleCenter.x + radius *cosf(angle);
         float y = circleCenter.y + radius *sinf(angle);
-        Vector2 five_pos = {x, y};
+        Vector2 five_pos = {x, y}; 
 
         for(long int i = 0; i < particleCount; i++)
         {
@@ -50,7 +50,7 @@ int main () {
             particles[i].Attract(three_pos, 2.5);
             particles[i].Attract(four_pos, 1.5);
             particles[i].Attract(five_pos, 5);
-            particles[i].Friction(0.996);
+            particles[i].Friction(0.997);
             particles[i].Move(screenWidth, screenHeight);
 
         }
@@ -62,7 +62,7 @@ int main () {
 
         for(int i = 0; i < particleCount; i++)
         {
-            particles[i].Draw();
+            particles[i].Draw(i);
         }
 
         DrawFPS(10, 10);

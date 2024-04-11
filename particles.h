@@ -8,6 +8,8 @@ class Particle
         Vector2 position;
         Vector2 velocity;
         Color color;
+        Color color1;
+        Color color2;
 
         float getDistance(Vector2 position);
         Vector2 getNormal(Vector2 sec_position);
@@ -19,6 +21,6 @@ class Particle
         void Attract(Vector2 attract_to_position, float multiplier);
         void Friction(float f_amount);
         void Move(int w_screen, int h_screen);
-        void Draw();
+        void Draw(int count);
 
 };

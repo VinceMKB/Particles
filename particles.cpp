@@ -7,7 +7,8 @@ Particle::Particle(int w_screen, int h_screen)
     velocity.x = GetRandomValue(-100, 100) / 50.f;
     velocity.y = GetRandomValue(-100, 100) / 50.f;
     //color = {0, 255, 0, 100};//Green
-    color = {0, 64, 255, 100};//Blue
+    color1 = {0, 64, 255, 100};//Blue
+    color2 = {128, 0, 255, 100};//purple
 
 }
 
@@ -92,7 +93,9 @@ void Particle::Move(int w_screen, int h_screen)
     
 }
 
-void Particle::Draw()
+void Particle::Draw(int count)
 {
+    int m_count = count;
+    color = (m_count % 2 == 0) ? color1 : color2;
     DrawPixelV(position, color);
 }
