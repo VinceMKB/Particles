@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <math.h>
 #include <raylib.h>
+#include <raymath.h>
+#include <math.h>
+#include <deque>
 
 class Particle
 {
