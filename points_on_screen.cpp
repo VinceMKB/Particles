@@ -5,7 +5,9 @@ points_on_screen::points_on_screen()
 {
     
     particles = (Particle*)malloc(particleCount * sizeof(Particle));
+    circleState = initCircleMState(screen_Width, screen_Height);
     squareState = initSquareMState();
+    
 
 }
 
@@ -56,27 +58,15 @@ void points_on_screen::square_Draw()
 
 Vector2 points_on_screen::circle_points()
 {
-    
-    static float angle = 0.0f;
-    const float speed = 0.01f;
-    
-    Vector2 circle_center = {screen_Width/2, screen_Height/2};
-    float radius = 175.0f;
+    updateCircleMState(circleState);
 
-    angle += speed;
-
-    float x = circle_center.x + radius *cosf(angle);
-    float y = circle_center.y + radius *sinf(angle);
-    
-    Vector2 point_circle = {x, y};
-    
-    return point_circle;
+    return getCurrentCirclePoint(circleState);
 }
 
 Vector2 points_on_screen::square_points()
 {
     updateSquareMState(squareState);
-    return getCurrentPoint(squareState);
+    return getCurrentSquarePoint(squareState);
 }
 
 void points_on_screen::presetOne()
@@ -101,7 +91,7 @@ void points_on_screen::presetOne()
 
 
     Vector2 four_pos = points_on_screen::circle_points();
-    float at_four_pos = 20;
+    float at_four_pos = 50;
     preset_one_points.push_back(four_pos);
     at_one_points.push_back(at_four_pos);
 
@@ -160,4 +150,22 @@ void points_on_screen::presetThree()
 
     points_on_screen::physics(preset_three_points, at_three_points);
 
+}
+
+void points_on_screen::presetFour()
+{
+    deque <Vector2> preset_four_points;
+    deque <float> at_four_points;
+
+    Vector2 one_pos = {400, 400};
+    float at_one_pos = 1;
+    preset_four_points.push_back(one_pos);
+    at_four_points.push_back(at_one_pos);
+
+    Vector2 MousePosition = (Vector2){(float)GetMouseX(), (float)GetMouseY()};
+    float at_two_pos = 100;
+    preset_four_points.push_back(MousePosition);
+    at_four_points.push_back(at_two_pos);
+
+    points_on_screen::physics(preset_four_points, at_four_points);
 }

@@ -16,6 +16,6 @@ struct SquareMState
 
 SquareMState initSquareMState();
 void updateSquareMState(SquareMState& state);
-Vector2 getCurrentPoint(const SquareMState& state);
+Vector2 getCurrentSquarePoint(const SquareMState& state);
 
 #endif

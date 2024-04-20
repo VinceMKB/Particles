@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "particles.h"
 #include "square_movementstate.h"
+#include "circle_movementstate.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ class points_on_screen
     private:
         Particle *particles;
         SquareMState squareState;
-        //vector<Particle> particles;
+        CircleMState circleState;
 
     public:
 
@@ -39,6 +40,7 @@ class points_on_screen
         void presetOne();
         void presetTwo();
         void presetThree();
+        void presetFour();
         
     
 };

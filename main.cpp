@@ -12,7 +12,6 @@ int main () {
     points_on_screen* myPointsOnScreen = new points_on_screen;
 
     SetRandomSeed(1);
-
     myPointsOnScreen -> particle_init();
 
     int current_preset = 1;
@@ -24,7 +23,7 @@ int main () {
         
         //myPointsOnScreen -> presetOne();
 
-        if (IsKeyDown(KEY_KP_1) || IsKeyDown(KEY_KP_2) || IsKeyDown(KEY_KP_3)) 
+        if (IsKeyDown(KEY_KP_1) || IsKeyDown(KEY_KP_2) || IsKeyDown(KEY_KP_3)||IsKeyDown(KEY_KP_4)) 
         {
             switch (GetKeyPressed()) 
             {
@@ -37,6 +36,9 @@ int main () {
                 case KEY_KP_3:
                     current_preset = 3;
                     break;
+                case KEY_KP_4:
+                    current_preset = 4;
+                    break;   
             }
         }
         
@@ -51,6 +53,9 @@ int main () {
                 break;
             case 3:
                 myPointsOnScreen -> presetThree();
+                break;
+            case 4:
+                myPointsOnScreen -> presetFour();
                 break;
             default:
                 myPointsOnScreen -> presetOne();
@@ -72,6 +77,7 @@ int main () {
             myPointsOnScreen -> square_Draw();
         }
 
+        DrawText("NumericKeyPad Presets: PresetOne(Default on '1'), PresetTwo(on '2'), PresetThree(on '3')", 10, 780, 15, GREEN);
         DrawFPS(10, 10);
 
         EndDrawing();

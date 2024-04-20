@@ -49,7 +49,7 @@ Vector2 Particle::getNormal(Vector2 sec_position)
 void Particle::Attract(Vector2 attract_to_position, float multiplier)
 {
     
-    float distance = fmax(getDistance(attract_to_position), 0.5);
+    float distance = fmax(getDistance(attract_to_position), 0.25);
     Vector2 normal = getNormal(attract_to_position);
 
     velocity.x -= normal.x/distance;
@@ -75,8 +75,7 @@ void Particle::Move(int w_screen, int h_screen)
     {
         position.x += w_screen;
     }
-
-    if(position.x >= w_screen)
+    else if(position.x >= w_screen)
     {
         position.x -= w_screen;
     }
@@ -85,8 +84,7 @@ void Particle::Move(int w_screen, int h_screen)
     {
         position.y += h_screen;
     }
-
-    if(position.y >= h_screen)
+    else if(position.y >= h_screen)
     {
         position.y -= h_screen;
     }
