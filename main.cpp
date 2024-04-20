@@ -11,111 +11,66 @@ int main () {
 
     points_on_screen* myPointsOnScreen = new points_on_screen;
 
-    //Brought into points_on_screen (1)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    /*
-    Vector2 circleCenter = {screenWidth/2, screenHeight/2};
-    float radius = 175.0f;
-    float angle = 0.0f;
-    float speed = 0.01f;
-    */
-    //New Code(1)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // It is implemented in the the Game Loop
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
-
-    //Brought into points_on_screen(2)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    /*
-    Vector2 one_pos = {400, 225};
-    Vector2 two_pos = {276.2563133, 523.7436867};
-    Vector2 three_pos = {523.7436867, 523.7436867};
-    */
-    //New Code(2)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //It is implemented in the Game Loop
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
     SetRandomSeed(1);
 
-    //Brought into points_on_screen(3)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    /*
-    const int particleCount = 100000;
-    Particle *particles = (Particle*)malloc(particleCount * sizeof(Particle));
-
-    for(long int i = 0; i < particleCount; i++)
-    {
-        particles[i] = Particle(screenWidth, screenHeight);
-    }
-    */
-    //New Code(3)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     myPointsOnScreen -> particle_init();
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
+    int current_preset = 1;
     InitWindow(screenWidth, screenHeight, "Particles");
     SetTargetFPS(60);
 
     while (WindowShouldClose() == false)
     {
         
-    //    Vector2 four_pos = {(float)GetMouseX(), (float)GetMouseY()};
+        //myPointsOnScreen -> presetOne();
 
-    //Brought into points_on_screen(4)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    /*
-        angle += speed;
-
-        float x = circleCenter.x + radius *cosf(angle);
-        float y = circleCenter.y + radius *sinf(angle);
-        Vector2 five_pos = {x, y};
-    */
-    //New Code(4)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
-    //Brought into points_on_screen(5)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    /*
-        for(long int i = 0; i < particleCount; i++)
+        if (IsKeyDown(KEY_KP_1) || IsKeyDown(KEY_KP_2) || IsKeyDown(KEY_KP_3)) 
         {
-
-            particles[i].Attract(one_pos, 2.5);
-            particles[i].Attract(two_pos, 2.5);
-            particles[i].Attract(three_pos, 2.5);
-            particles[i].Attract(four_pos, 1.5);
-            particles[i].Attract(five_pos, 5);
-            particles[i].Friction(0.997);
-            particles[i].Move(screenWidth, screenHeight);
-
+            switch (GetKeyPressed()) 
+            {
+                case KEY_KP_1:
+                    current_preset = 1;
+                    break;
+                case KEY_KP_2:
+                    current_preset = 2;
+                    break;
+                case KEY_KP_3:
+                    current_preset = 3;
+                    break;
+            }
         }
-    */
-    //New Code(5)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        myPointsOnScreen -> presetOne();
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+        
+
+        switch (current_preset) 
+        {
+            case 1:
+                myPointsOnScreen -> presetOne();
+                break;
+            case 2:
+                myPointsOnScreen -> presetTwo();
+                break;
+            case 3:
+                myPointsOnScreen -> presetThree();
+                break;
+            default:
+                myPointsOnScreen -> presetOne();
+                break;
+        }
         
         BeginDrawing();
         ClearBackground(BLACK);
 
-    //Brought into points_on_screen(6)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    /*
-        DrawCircleV(five_pos, 10 , BLACK);
+        myPointsOnScreen -> particles_Draw();
 
-        for(int i = 0; i < particleCount; i++)
+        if(current_preset == 1)  
         {
-            particles[i].Draw(i);
+            myPointsOnScreen -> circle_Draw();
         }
-    */
-    //New Code(6)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    myPointsOnScreen -> particles_Draw();
-    myPointsOnScreen -> circle_Draw();
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+        if(current_preset == 2)
+        {
+            myPointsOnScreen -> square_Draw();
+        }
 
         DrawFPS(10, 10);
 
@@ -123,13 +78,8 @@ int main () {
     }
 
     CloseWindow();
-    //Brought into points_on_screen(7)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //MemFree(particles);
-    //New Code(7)
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     delete myPointsOnScreen;
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
     return 0;
 }

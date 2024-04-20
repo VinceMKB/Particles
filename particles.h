@@ -1,5 +1,9 @@
+#ifndef PARTICLES_H
+#define PARTICLES_H
+
 #include <stdlib.h>
 #include <math.h>
+#include <vector>
 #include <raylib.h>
 #include <raymath.h>
 #include <math.h>
@@ -27,3 +31,5 @@ class Particle
         void Draw(int count);
 
 };
+
+#endif
